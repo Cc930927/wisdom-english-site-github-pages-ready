@@ -19,7 +19,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    # 🌟 關鍵修改 1：告訴機器人所有的指令都要進到第二層資料夾執行
     defaults:
       run:
         working-directory: ./wisdom-english-site-github-pages-ready
@@ -29,9 +28,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
+          node-version: 22 # 🌟 升級版本，消滅黃色警告
+      - name: Clean and Install dependencies
+        # 🌟 關鍵修改：先強制刪除不相容的資料夾，再重新乾淨安裝
+        run: |
+          rm -rf node_modules
+          npm install
       - name: Build
         run: npm run build
       - name: Setup Pages
@@ -39,7 +41,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # 🌟 關鍵修改 2：告訴機器人打包好的檔案在第二層資料夾的 dist 裡面
           path: './wisdom-english-site-github-pages-ready/dist'
       - name: Deploy to GitHub Pages
         id: deployment
