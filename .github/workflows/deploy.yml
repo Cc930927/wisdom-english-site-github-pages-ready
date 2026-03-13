@@ -19,6 +19,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    # 🌟 關鍵修改 1：告訴機器人所有的指令都要進到第二層資料夾執行
+    defaults:
+      run:
+        working-directory: ./wisdom-english-site-github-pages-ready
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,7 +39,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          # 🌟 關鍵修改 2：告訴機器人打包好的檔案在第二層資料夾的 dist 裡面
+          path: './wisdom-english-site-github-pages-ready/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
