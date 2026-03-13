@@ -2,8 +2,8 @@ import { defineConfig } from 'vite'
 import { resolve } from 'node:path'
 
 export default defineConfig({
-  // './' 讓 GitHub Pages 的 repo 路徑與自訂網域都能正常載入靜態資源
-  base: './',
+  // 🌟 關鍵修改：必須跟你的 GitHub 儲存庫名稱完全一樣（前後都要有斜線）
+  base: '/wisdom-english-site-github-pages-ready/',
   build: {
     rollupOptions: {
       input: {
